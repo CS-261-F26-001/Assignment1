@@ -1,0 +1,34 @@
+M= num of earthquakes returned by a search (M<= N)
+k= num of strongest earthquakes requested (k <= N)
+
+load_data()
+Time: O(N): we read every line in the file once and make one Earthquake object per line.
+Storage: O(N): We store every earthquake object for every row in the self.earthquakes list.
+
+find_by_location():
+Time: O(N): We loop backwards through the entire list.
+Storage: O(M): this is O(N) in the worst case. We make new results list only the matches
+
+find_by_id():
+Time: O(N): Linear search so in the worst case we have to look at everything once.
+Storage: O(1): Only a loop varibale and return value are used.
+
+find_strongest():
+Time: O(N): We look at every earthquake once and keep track of biggest one
+Storage: O(1): Only keeping a reference to current strongest earthquake.
+
+find_nearby():
+Time: O(N): We run the Haversine formula for every earthquake in the list and its a constant number
+Storage: O(M): which is O(N) in the worst case for the list of earthquakes in the radius
+
+find_k_strongest():
+Time: We copy the list (O(N)), then k times we scan the remaining list to find the max (O(N)) and pop it out (O(N) because elements shift). That is k rounds of O(N) work, so O(N * k). If k is close to N this becomes O(N^2).
+Storage: O(N+k), which is O(N) beacuse we copy the list so we don't modify self.earthquakes
+
+find_duplicate():
+Time: O(N), we go through the list once and checking and adding to a set is O(1) on average.
+Storage: O(N): The set can hold up to N ids before duplicate is found
+
+find_busiest_day():
+Time: O(N): End pointers move forward N times and the start pointer also only ever moves forward at most N times total. This works since list was already sorted by the time by the time it gets into the loop inside the loop.
+Storage: O(1): We only keep the 2 indexes and best count.
